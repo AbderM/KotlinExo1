@@ -9,8 +9,6 @@
     android:gravity="center"
     tools:context=".BadgeActivity">
 
-
-
     <TextView
         android:id="@+id/nameTextView"
         android:layout_width="wrap_content"

@@ -1,8 +1,10 @@
 package com.example.networking
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.service.autofill.UserData
+import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
@@ -16,17 +18,17 @@ class BadgeActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_badge)
 
-        val nameTextView = findViewById<TextView>(R.id.nameTextView)
-        val jobTextView = findViewById<TextView>(R.id.jobTextView)
-        val mailTextView = findViewById<TextView>(R.id.mailTextView)
+        val profile: Profile? = if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU){
+            Log.i("Probleme", "Je suis dans le tiramisu")
+            intent.getParcelableExtra("profile", Profile::class.java)
+        } else {
+            Log.i("Probleme", "je suis depreciate")
+            intent.getParcelableExtra("profile")
+        }
 
-        val nameValue = intent.getStringExtra("nameKey")
-        val jobValue = intent.getStringExtra("jobKey")
-        val mailValue = intent.getStringExtra("mailKey")
-
-        nameTextView.text = nameValue
-        jobTextView.text = jobValue
-        mailTextView.text = mailValue
+        findViewById<TextView>(R.id.nameTextView)?.text = profile?.name
+        findViewById<TextView>(R.id.jobTextView)?.text = profile?.job
+        findViewById<TextView>(R.id.mailTextView)?.text = profile?.mail
 
     }
 }

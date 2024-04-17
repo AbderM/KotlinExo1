@@ -18,19 +18,19 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
-
         val verifbutton = findViewById<Button>(R.id.start_verifactivity);
-        val nameEditText = findViewById<EditText>(R.id.nameEditText)
-        val jobEditText = findViewById<EditText>(R.id.jobEditText)
-        val mailEditText = findViewById<EditText>(R.id.mailEditText)
+        //val nameEditText = findViewById<EditText>(R.id.nameEditText)
+        //val jobEditText = findViewById<EditText>(R.id.jobEditText)
+        //val mailEditText = findViewById<EditText>(R.id.mailEditText)
 
         verifbutton.setOnClickListener{
+            val name = findViewById<EditText>(R.id.nameEditText).text.toString()
+            val job = findViewById<EditText>(R.id.jobEditText).text.toString()
+            val mail = findViewById<EditText>(R.id.mailEditText).text.toString()
+            val profile = Profile(name, job, mail)
             val intent = Intent(this, VerifActivity::class.java)
-            intent.putExtra("nameKey", nameEditText.text.toString())
-            intent.putExtra("jobKey", jobEditText.text.toString())
-            intent.putExtra("mailKey", mailEditText.text.toString())
+            intent.putExtra("profile", profile)
             startActivity(intent)
-
         }
 
 
